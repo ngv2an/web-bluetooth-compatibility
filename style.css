@@ -61,6 +61,7 @@ tbody th .os-head {
 .logo-sm {
   width: 22px;
   height: 22px;
+  object-fit: contain;
 }
 
 .cell {
