@@ -4,69 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Web Bluetooth Compatibility</title>
-<style>
-  :root {
-    --green: #16a34a;
-    --green-bg: #dcfce7;
-    --red: #dc2626;
-    --red-bg: #fee2e2;
-    --border: #e2e8f0;
-    --head-bg: #1e293b;
-    --row-bg: #f8fafc;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: #f1f5f9;
-    color: #0f172a;
-    padding: 32px 16px;
-  }
-  .wrap { max-width: 1100px; margin: 0 auto; }
-  h1 { font-size: 1.6rem; margin: 0 0 4px; }
-  .sub { color: #64748b; margin: 0 0 24px; font-size: 0.95rem; }
-  .table-scroll { overflow-x: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-  table { border-collapse: collapse; width: 100%; background: #fff; min-width: 720px; }
-  th, td { border: 1px solid var(--border); padding: 14px 12px; text-align: center; }
-  thead th {
-    background: var(--head-bg);
-    color: #fff;
-    font-size: 0.95rem;
-    position: sticky;
-    top: 0;
-  }
-  thead th .browser-head { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  thead th .corner { background: var(--head-bg); }
-  tbody th {
-    background: var(--row-bg);
-    text-align: left;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  tbody th .os-head { display: flex; align-items: center; gap: 8px; }
-  .logo { width: 30px; height: 30px; display: inline-block; vertical-align: middle; }
-  .logo-sm { width: 22px; height: 22px; }
-  .cell { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 0.78rem; font-weight: 700;
-    padding: 4px 10px; border-radius: 999px;
-    white-space: nowrap;
-  }
-  .badge.yes { color: var(--green); background: var(--green-bg); }
-  .badge.no  { color: var(--red);  background: var(--red-bg); }
-  .badge .dot { width: 8px; height: 8px; border-radius: 50%; }
-  .badge.yes .dot { background: var(--green); }
-  .badge.no  .dot { background: var(--red); }
-  .store-link {
-    font-size: 0.74rem; color: #2563eb; text-decoration: none; font-weight: 600;
-    display: inline-flex; align-items: center; gap: 4px;
-  }
-  .store-link:hover { text-decoration: underline; }
-  .legend { display: flex; gap: 20px; margin-top: 18px; font-size: 0.85rem; color: #475569; flex-wrap: wrap; }
-  .legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .note { margin-top: 14px; font-size: 0.8rem; color: #94a3b8; line-height: 1.5; }
-</style>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <div class="wrap">
@@ -126,80 +64,7 @@
           </th>
         </tr>
       </thead>
-      <tbody>
-        <!-- Windows -->
-        <tr>
-          <th><div class="os-head">
-            <svg class="logo-sm" viewBox="0 0 48 48"><path fill="#00adef" d="M4 7l17-2v17H4zm0 18h17v17L4 40zm19-20l21-3v22H23zm0 22h21v22l-21-3z"/></svg>
-            Windows
-          </div></th>
-          <td><div class="cell"><span class="badge yes"><span class="dot"></span>Supported</span></div></td>
-          <td><div class="cell"><span class="badge yes"><span class="dot"></span>Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-        </tr>
-        <!-- macOS -->
-        <tr>
-          <th><div class="os-head">
-            <svg class="logo-sm" viewBox="0 0 48 48"><path fill="#333" d="M33 25c0-5 4-7 4-7-2-3-6-3-7-3-3 0-5 2-7 2s-4-2-7-2c-4 0-8 3-8 9 0 6 4 14 8 14 2 0 3-2 6-2s4 2 6 2c3 0 6-5 7-8-3-1-6-3-6-7zm-7-13c2-2 2-5 2-5s-3 0-5 2-2 5-2 5 3 0 5-2z"/></svg>
-            macOS
-          </div></th>
-          <td><div class="cell"><span class="badge yes"><span class="dot"></span>Supported</span></div></td>
-          <td><div class="cell"><span class="badge yes"><span class="dot"></span>Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-        </tr>
-        <!-- Linux -->
-        <tr>
-          <th><div class="os-head">
-            <svg class="logo-sm" viewBox="0 0 48 48"><ellipse cx="24" cy="30" rx="13" ry="14" fill="#222"/><ellipse cx="24" cy="32" rx="9" ry="9" fill="#fff"/><circle cx="20" cy="18" r="6" fill="#222"/><circle cx="28" cy="18" r="6" fill="#222"/><circle cx="20" cy="18" r="2.5" fill="#fff"/><circle cx="28" cy="18" r="2.5" fill="#fff"/><path fill="#f5b400" d="M21 23l3 4 3-4-3-3z"/></svg>
-            Linux
-          </div></th>
-          <td><div class="cell"><span class="badge yes"><span class="dot"></span>Supported</span></div></td>
-          <td><div class="cell"><span class="badge yes"><span class="dot"></span>Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-        </tr>
-        <!-- Android -->
-        <tr>
-          <th><div class="os-head">
-            <svg class="logo-sm" viewBox="0 0 48 48"><path fill="#3ddc84" d="M14 20h20v15a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3zM10 20a2 2 0 0 1 4 0v9a2 2 0 0 1-4 0zm24 0a2 2 0 0 1 4 0v9a2 2 0 0 1-4 0zM18 38h3v5a2 2 0 0 1-4 0v-5zm9 0h3v5a2 2 0 0 1-4 0v-5zM16 18a8 8 0 0 1 16 0z"/><circle cx="20" cy="14" r="1.3" fill="#fff"/><circle cx="28" cy="14" r="1.3" fill="#fff"/></svg>
-            Android
-          </div></th>
-          <td><div class="cell"><span class="badge yes"><span class="dot"></span>Supported</span></div></td>
-          <td><div class="cell"><span class="badge yes"><span class="dot"></span>Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-        </tr>
-        <!-- iOS -->
-        <tr>
-          <th><div class="os-head">
-            <svg class="logo-sm" viewBox="0 0 48 48"><path fill="#333" d="M33 25c0-5 4-7 4-7-2-3-6-3-7-3-3 0-5 2-7 2s-4-2-7-2c-4 0-8 3-8 9 0 6 4 14 8 14 2 0 3-2 6-2s4 2 6 2c3 0 6-5 7-8-3-1-6-3-6-7zm-7-13c2-2 2-5 2-5s-3 0-5 2-2 5-2 5 3 0 5-2z"/></svg>
-            iOS
-          </div></th>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-          <td><div class="cell">
-            <span class="badge yes"><span class="dot"></span>Supported</span>
-            <a class="store-link" href="https://apps.apple.com/app/bluefy-web-ble-browser/id1492822055" target="_blank" rel="noopener">
-              <svg class="logo-sm" style="width:14px;height:14px" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 1.5c.1 1.1-.3 2.2-1 3-1 .8-2.1 1.3-3.3 1.2-.1-1.1.4-2.2 1.1-3 1-.8 2.1-1.3 3.2-1.2zM20 17c-.6 1.3-.9 1.9-1.6 3-1 1.6-2.5 3.5-4.3 3.5-1.6 0-2-.9-4.1-.9s-2.6.9-4.1.9c-1.8 0-3.2-1.8-4.2-3.4C-1 18.6-1.3 13.2 1.9 10.3c1-.9 2.4-1.6 3.9-1.6 1.7 0 2.7 1 4.1 1 1.3 0 2.1-1 4.1-1 1.3 0 2.7.7 3.7 2-3.2 1.8-2.7 6.4 2.3 6.3z"/></svg>
-              App Store
-            </a>
-          </div></td>
-        </tr>
-        <!-- Chromebook -->
-        <tr>
-          <th><div class="os-head">
-            <svg class="logo-sm" viewBox="0 0 48 48"><rect x="6" y="9" width="36" height="24" rx="2" fill="#5f6368"/><rect x="9" y="12" width="30" height="18" fill="#fff"/><path d="M4 35h40l-2 4H6z" fill="#9aa0a6"/><circle cx="24" cy="21" r="5" fill="#4285f4"/></svg>
-            Chromebook
-          </div></th>
-          <td><div class="cell"><span class="badge yes"><span class="dot"></span>Supported</span></div></td>
-          <td><div class="cell"><span class="badge yes"><span class="dot"></span>Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-          <td><div class="cell"><span class="badge no"><span class="dot"></span>Not Supported</span></div></td>
-        </tr>
-      </tbody>
+      <tbody id="compatibility-body"></tbody>
     </table>
   </div>
 
@@ -214,5 +79,6 @@
     Bluefy chỉ phát hành trên iOS/iPadOS (App Store).
   </p>
 </div>
+<script src="script.js" defer></script>
 </body>
 </html>
