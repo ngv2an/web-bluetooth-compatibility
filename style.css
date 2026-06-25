@@ -25,17 +25,6 @@ body {
   margin: 0 auto;
 }
 
-h1 {
-  font-size: 1.6rem;
-  margin: 0 0 4px;
-}
-
-.sub {
-  color: #64748b;
-  margin: 0 0 24px;
-  font-size: 0.95rem;
-}
-
 .table-scroll {
   overflow-x: auto;
   border-radius: 12px;
@@ -174,11 +163,4 @@ tbody th .os-head {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-
-.note {
-  margin-top: 14px;
-  font-size: 0.8rem;
-  color: #94a3b8;
-  line-height: 1.5;
 }
