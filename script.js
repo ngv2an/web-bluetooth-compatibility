@@ -1,4 +1,4 @@
-const browsers = ["Chrome", "Edge", "Safari", "Bluefy"];
+const browsers = ["Chrome", "Firefox", "Opera"];
 
 const icons = {
   windows: `<svg class="logo-sm" viewBox="0 0 48 48" aria-hidden="true"><path fill="#00adef" d="M4 7l17-2v17H4zm0 18h17v17L4 40zm19-20l21-3v22H23zm0 22h21v22l-21-3z"/></svg>`,
@@ -13,38 +13,42 @@ const compatibilityRows = [
   {
     os: "Windows",
     icon: icons.windows,
-    support: { Chrome: true, Edge: true, Safari: false, Bluefy: false },
+    support: { Chrome: true, Firefox: false, Opera: true },
+    other: { browser: "Edge", supported: true },
   },
   {
     os: "macOS",
     icon: icons.apple,
-    support: { Chrome: true, Edge: true, Safari: false, Bluefy: false },
+    support: { Chrome: true, Firefox: false, Opera: true },
+    other: { browser: "Safari", supported: false },
   },
   {
     os: "Linux",
     icon: icons.linux,
-    support: { Chrome: true, Edge: true, Safari: false, Bluefy: false },
+    support: { Chrome: true, Firefox: false, Opera: true },
   },
   {
     os: "Android",
     icon: icons.android,
-    support: { Chrome: true, Edge: true, Safari: false, Bluefy: false },
+    support: { Chrome: true, Firefox: false, Opera: true },
   },
   {
     os: "iOS",
     icon: icons.apple,
-    support: { Chrome: false, Edge: false, Safari: false, Bluefy: true },
-    links: {
-      Bluefy: {
+    support: { Chrome: false, Firefox: false, Opera: false },
+    other: {
+      browser: "Bluefy",
+      supported: true,
+      link: {
         href: "https://apps.apple.com/app/bluefy-web-ble-browser/id1492822055",
         label: "App Store",
       },
     },
   },
   {
-    os: "Chromebook",
+    os: "ChromeOS",
     icon: icons.chromebook,
-    support: { Chrome: true, Edge: true, Safari: false, Bluefy: false },
+    support: { Chrome: true, Firefox: false, Opera: true },
   },
 ];
 
@@ -52,7 +56,7 @@ function createBadge(isSupported) {
   const statusText = isSupported ? "Supported" : "Not Supported";
   const statusClass = isSupported ? "yes" : "no";
 
-  return `<span class="badge ${statusClass}"><span class="dot"></span>${statusText}</span>`;
+  return `<span class="badge ${statusClass}">${statusText}</span>`;
 }
 
 function createStoreLink(link) {
@@ -69,13 +73,26 @@ function createStoreLink(link) {
 }
 
 function createCompatibilityCell(row, browser) {
-  const link = row.links?.[browser];
-
   return `
     <td>
       <div class="cell">
         ${createBadge(row.support[browser])}
-        ${createStoreLink(link)}
+      </div>
+    </td>
+  `;
+}
+
+function createOtherCell(other) {
+  if (!other) {
+    return `<td class="empty"></td>`;
+  }
+
+  return `
+    <td>
+      <div class="cell">
+        <span class="other-name">${other.browser}</span>
+        ${createBadge(other.supported)}
+        ${createStoreLink(other.link)}
       </div>
     </td>
   `;
@@ -98,6 +115,7 @@ function renderCompatibilityTable() {
           </div>
         </th>
         ${browsers.map((browser) => createCompatibilityCell(row, browser)).join("")}
+        ${createOtherCell(row.other)}
       </tr>
     `)
     .join("");
