@@ -1,10 +1,11 @@
 const browsers = ["Chrome", "Firefox", "Opera"];
 
 const icons = {
-  windows: `<svg class="logo-sm" viewBox="0 0 48 48" aria-hidden="true"><path fill="#00adef" d="M4 7l17-2v17H4zm0 18h17v17L4 40zm19-20l21-3v22H23zm0 22h21v22l-21-3z"/></svg>`,
-  apple: `<svg class="logo-sm" viewBox="0 0 48 48" aria-hidden="true"><path fill="#333" d="M33 25c0-5 4-7 4-7-2-3-6-3-7-3-3 0-5 2-7 2s-4-2-7-2c-4 0-8 3-8 9 0 6 4 14 8 14 2 0 3-2 6-2s4 2 6 2c3 0 6-5 7-8-3-1-6-3-6-7zm-7-13c2-2 2-5 2-5s-3 0-5 2-2 5-2 5 3 0 5-2z"/></svg>`,
-  linux: `<svg class="logo-sm" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="24" cy="30" rx="13" ry="14" fill="#222"/><ellipse cx="24" cy="32" rx="9" ry="9" fill="#fff"/><circle cx="20" cy="18" r="6" fill="#222"/><circle cx="28" cy="18" r="6" fill="#222"/><circle cx="20" cy="18" r="2.5" fill="#fff"/><circle cx="28" cy="18" r="2.5" fill="#fff"/><path fill="#f5b400" d="M21 23l3 4 3-4-3-3z"/></svg>`,
-  android: `<svg class="logo-sm" viewBox="0 0 48 48" aria-hidden="true"><path fill="#3ddc84" d="M14 20h20v15a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3zM10 20a2 2 0 0 1 4 0v9a2 2 0 0 1-4 0zm24 0a2 2 0 0 1 4 0v9a2 2 0 0 1-4 0zM18 38h3v5a2 2 0 0 1-4 0v-5zm9 0h3v5a2 2 0 0 1-4 0v-5zM16 18a8 8 0 0 1 16 0z"/><circle cx="20" cy="14" r="1.3" fill="#fff"/><circle cx="28" cy="14" r="1.3" fill="#fff"/></svg>`,
+  windows: `<img class="logo-sm" src="images/logo windows.png" alt="Windows" />`,
+  macos: `<img class="logo-sm" src="images/logo macos.png" alt="macOS" />`,
+  ios: `<img class="logo-sm" src="images/logo ios.png" alt="iOS" />`,
+  linux: `<img class="logo-sm" src="images/logo linux.png" alt="Linux" />`,
+  android: `<img class="logo-sm" src="images/logo Android.png" alt="Android" />`,
   chromebook: `<svg class="logo-sm" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="24" rx="2" fill="#5f6368"/><rect x="9" y="12" width="30" height="18" fill="#fff"/><path d="M4 35h40l-2 4H6z" fill="#9aa0a6"/><circle cx="24" cy="21" r="5" fill="#4285f4"/></svg>`,
   appStore: `<img class="logo-sm" src="images/logo apple store.png" alt="App Store" />`,
 };
@@ -36,7 +37,7 @@ const compatibilityRows = [
   },
   {
     os: "macOS",
-    icon: icons.apple,
+    icon: icons.macos,
     support: { Chrome: true, Firefox: false, Opera: true },
     other: { browser: "Safari", supported: false },
   },
@@ -52,7 +53,7 @@ const compatibilityRows = [
   },
   {
     os: "iOS",
-    icon: icons.apple,
+    icon: icons.ios,
     support: { Chrome: false, Firefox: false, Opera: false },
     other: {
       browser: "Bluefy",
