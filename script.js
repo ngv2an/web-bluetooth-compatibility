@@ -112,15 +112,30 @@ function createSpecialCell(special) {
   }
 
   const statusClass = special.supported ? "yes" : "no";
+  const browserTag = createBrowserTag(special.browser);
+  const tag = special.link
+    ? `<a class="browser-link" href="${special.link.href}" target="_blank" rel="noopener">${browserTag}</a>`
+    : browserTag;
 
   return `
     <td class="${statusClass}">
       <div class="cell">
-        ${createBrowserTag(special.browser)}
-        ${createBadge(special.supported)}
+        ${tag}
         ${createStoreLink(special.link)}
+        ${createBadge(special.supported)}
       </div>
     </td>
+  `;
+}
+
+function createOsHeader(row) {
+  return `
+    <th>
+      <div class="os-head">
+        ${row.icon}
+        ${row.os}
+      </div>
+    </th>
   `;
 }
 
@@ -134,15 +149,11 @@ function renderCompatibilityTable() {
   tableBody.innerHTML = compatibilityRows
     .map((row) => `
       <tr>
-        <th>
-          <div class="os-head">
-            ${row.icon}
-            ${row.os}
-          </div>
-        </th>
+        ${createOsHeader(row)}
         ${createSpecialCell(row.other)}
         ${createSpecialCell(row.bluefy)}
         ${browsers.map((browser) => createCompatibilityCell(row, browser)).join("")}
+        ${createOsHeader(row)}
       </tr>
     `)
     .join("");

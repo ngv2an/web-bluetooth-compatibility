@@ -3,9 +3,9 @@
   --green-bg: #dcfce7;
   --red: #dc2626;
   --red-bg: #fee2e2;
-  --border: #e2e8f0;
+  --border: #64748b;
   --head-bg: #1e293b;
-  --row-bg: #f8fafc;
+  --row-bg: #fff;
 }
 
 * {
@@ -42,7 +42,7 @@ table {
 
 th,
 td {
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   padding: 14px 12px;
   text-align: center;
 }
@@ -57,15 +57,16 @@ td.no {
 
 tbody th {
   background: var(--row-bg);
-  text-align: left;
+  text-align: center;
   font-weight: 600;
   white-space: nowrap;
 }
 
 tbody th .os-head {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .logo-sm {
@@ -104,8 +105,9 @@ tbody th .os-head {
 
 .browser-tag {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   font-size: 0.85rem;
   font-weight: 700;
   color: #0f172a;
@@ -115,12 +117,22 @@ td.empty {
   background: var(--row-bg);
 }
 
+.browser-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.browser-link:hover .browser-tag {
+  text-decoration: underline;
+}
+
 .store-link {
   font-size: 0.74rem;
   color: #2563eb;
   text-decoration: none;
   font-weight: 600;
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
   gap: 4px;
 }
