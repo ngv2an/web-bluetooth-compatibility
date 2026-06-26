@@ -25,6 +25,14 @@ body {
   margin: 0 auto;
 }
 
+.page-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 24px;
+}
+
 .table-scroll {
   overflow-x: auto;
   border-radius: 12px;
