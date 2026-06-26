@@ -92,8 +92,10 @@ function createStoreLink(link) {
 }
 
 function createCompatibilityCell(row, browser) {
+  const statusClass = row.support[browser] ? "yes" : "no";
+
   return `
-    <td>
+    <td class="${statusClass}">
       <div class="cell">
         ${createBrowserTag(browser)}
         ${createBadge(row.support[browser])}
@@ -107,8 +109,10 @@ function createOtherCell(other) {
     return `<td class="empty"></td>`;
   }
 
+  const statusClass = other.supported ? "yes" : "no";
+
   return `
-    <td>
+    <td class="${statusClass}">
       <div class="cell">
         ${createBrowserTag(other.browser)}
         ${createBadge(other.supported)}

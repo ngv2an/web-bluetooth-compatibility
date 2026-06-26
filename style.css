@@ -47,6 +47,14 @@ td {
   text-align: center;
 }
 
+td.yes {
+  background: var(--green-bg);
+}
+
+td.no {
+  background: var(--red-bg);
+}
+
 tbody th {
   background: var(--row-bg);
   text-align: left;
