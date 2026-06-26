@@ -76,8 +76,8 @@ const compatibilityRows = [
 ];
 
 const selectedParams = new URLSearchParams(window.location.search);
-const selectedOs = (selectedParams.get("os") || "").trim().toLowerCase();
-const selectedBrowser = (selectedParams.get("browser") || "").trim().toLowerCase();
+let selectedOs = (selectedParams.get("os") || "").trim().toLowerCase();
+let selectedBrowser = (selectedParams.get("browser") || "").trim().toLowerCase();
 
 function isSelected(os, browser) {
   return (
@@ -121,7 +121,7 @@ function createCompatibilityCell(row, browser) {
   const selectedClass = isSelected(row.os, browser) ? " selected" : "";
 
   return `
-    <td class="${statusClass}${selectedClass}">
+    <td class="${statusClass}${selectedClass}" data-os="${row.os}" data-browser="${browser}">
       <div class="cell">
         ${createBrowserTag(browser)}
         ${createBadge(row.support[browser])}
@@ -143,7 +143,7 @@ function createSpecialCell(special, os) {
     : browserTag;
 
   return `
-    <td class="${statusClass}${selectedClass}">
+    <td class="${statusClass}${selectedClass}" data-os="${os}" data-browser="${special.browser}">
       <div class="cell">
         ${tag}
         ${createStoreLink(special.link)}
@@ -155,7 +155,7 @@ function createSpecialCell(special, os) {
 
 function createOsHeader(row) {
   return `
-    <th>
+    <th class="os-col">
       <div class="os-head">
         ${row.icon}
         ${row.os}
@@ -182,6 +182,40 @@ function renderCompatibilityTable() {
       </tr>
     `)
     .join("");
+}
+
+function updateUrl(os, browser) {
+  const query =
+    os && browser
+      ? `?os=${encodeURIComponent(os)}&browser=${encodeURIComponent(browser)}`
+      : "";
+  history.replaceState(null, "", `${location.pathname}${query}`);
+}
+
+function handleTableClick(event) {
+  // Clicking either outermost OS column clears the highlight.
+  if (event.target.closest("th.os-col")) {
+    selectedOs = "";
+    selectedBrowser = "";
+    updateUrl();
+    renderCompatibilityTable();
+    return;
+  }
+
+  // Clicking a browser cell highlights it and reflects it in the URL.
+  const cell = event.target.closest("td[data-browser]");
+  if (cell) {
+    selectedOs = cell.dataset.os.toLowerCase();
+    selectedBrowser = cell.dataset.browser.toLowerCase();
+    updateUrl(cell.dataset.os, cell.dataset.browser);
+    renderCompatibilityTable();
+  }
+}
+
+const compatibilityBody = document.querySelector("#compatibility-body");
+
+if (compatibilityBody) {
+  compatibilityBody.addEventListener("click", handleTableClick);
 }
 
 renderCompatibilityTable();

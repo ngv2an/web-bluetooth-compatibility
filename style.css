@@ -123,6 +123,11 @@ td.empty {
   background: var(--row-bg);
 }
 
+td[data-browser],
+th.os-col {
+  cursor: pointer;
+}
+
 /* Dim rows that aren't the selected one */
 tr.dimmed,
 tr.dimmed .browser-tag,
