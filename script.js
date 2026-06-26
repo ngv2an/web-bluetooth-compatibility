@@ -172,8 +172,8 @@ function renderCompatibilityTable() {
       <tr>
         ${createOsHeader(row)}
         ${createSpecialCell(row.other, row.os)}
-        ${createSpecialCell(row.mobile, row.os)}
         ${browsers.map((browser) => createCompatibilityCell(row, browser)).join("")}
+        ${createSpecialCell(row.mobile, row.os)}
         ${createOsHeader(row)}
       </tr>
     `)
