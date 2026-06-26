@@ -71,9 +71,22 @@ const compatibilityRows = [
   {
     os: "ChromeOS",
     icon: icons.chromebook,
-    support: { Chrome: true, Firefox: false, Opera: false },
+    support: { Chrome: true },
   },
 ];
+
+const selectedParams = new URLSearchParams(window.location.search);
+const selectedOs = (selectedParams.get("os") || "").trim().toLowerCase();
+const selectedBrowser = (selectedParams.get("browser") || "").trim().toLowerCase();
+
+function isSelected(os, browser) {
+  return (
+    selectedOs &&
+    selectedBrowser &&
+    os.toLowerCase() === selectedOs &&
+    browser.toLowerCase() === selectedBrowser
+  );
+}
 
 function createBadge(isSupported) {
   const statusText = isSupported ? "✅ Supported" : "❌ Not Supported";
@@ -96,10 +109,15 @@ function createStoreLink(link) {
 }
 
 function createCompatibilityCell(row, browser) {
+  if (row.support[browser] === undefined) {
+    return `<td class="empty"></td>`;
+  }
+
   const statusClass = row.support[browser] ? "yes" : "no";
+  const selectedClass = isSelected(row.os, browser) ? " selected" : "";
 
   return `
-    <td class="${statusClass}">
+    <td class="${statusClass}${selectedClass}">
       <div class="cell">
         ${createBrowserTag(browser)}
         ${createBadge(row.support[browser])}
@@ -108,19 +126,20 @@ function createCompatibilityCell(row, browser) {
   `;
 }
 
-function createSpecialCell(special) {
+function createSpecialCell(special, os) {
   if (!special) {
     return `<td class="empty"></td>`;
   }
 
   const statusClass = special.supported ? "yes" : "no";
+  const selectedClass = isSelected(os, special.browser) ? " selected" : "";
   const browserTag = createBrowserTag(special.browser);
   const tag = special.link
     ? `<a class="browser-link" href="${special.link.href}" target="_blank" rel="noopener">${browserTag}</a>`
     : browserTag;
 
   return `
-    <td class="${statusClass}">
+    <td class="${statusClass}${selectedClass}">
       <div class="cell">
         ${tag}
         ${createStoreLink(special.link)}
@@ -152,8 +171,8 @@ function renderCompatibilityTable() {
     .map((row) => `
       <tr>
         ${createOsHeader(row)}
-        ${createSpecialCell(row.other)}
-        ${createSpecialCell(row.mobile)}
+        ${createSpecialCell(row.other, row.os)}
+        ${createSpecialCell(row.mobile, row.os)}
         ${browsers.map((browser) => createCompatibilityCell(row, browser)).join("")}
         ${createOsHeader(row)}
       </tr>
