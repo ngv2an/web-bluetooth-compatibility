@@ -18,6 +18,7 @@ const browserIcons = {
   Safari: `<img class="logo-sm" src="images/logo safari.png" alt="Safari" />`,
   "Mobile Safari": `<img class="logo-sm" src="images/logo safari.png" alt="Mobile Safari" />`,
   Bluefy: `<img class="logo-sm" src="images/logo bluefy.png" alt="Bluefy" />`,
+  "Samsung Internet": `<img class="logo-sm" src="images/logo samsung browser.png" alt="Samsung Internet" />`,
 };
 
 function createBrowserTag(browser) {
@@ -51,13 +52,14 @@ const compatibilityRows = [
     os: "Android",
     icon: icons.android,
     support: { Chrome: true, Firefox: false, Opera: true },
+    mobile: { browser: "Samsung Internet", supported: true },
   },
   {
     os: "iOS",
     icon: icons.ios,
     support: { Chrome: false, Firefox: false, Opera: false },
     other: { browser: "Mobile Safari", supported: false },
-    bluefy: {
+    mobile: {
       browser: "Bluefy",
       supported: true,
       link: {
@@ -151,7 +153,7 @@ function renderCompatibilityTable() {
       <tr>
         ${createOsHeader(row)}
         ${createSpecialCell(row.other)}
-        ${createSpecialCell(row.bluefy)}
+        ${createSpecialCell(row.mobile)}
         ${browsers.map((browser) => createCompatibilityCell(row, browser)).join("")}
         ${createOsHeader(row)}
       </tr>
