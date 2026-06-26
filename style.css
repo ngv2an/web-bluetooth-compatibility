@@ -28,9 +28,10 @@ body {
 .page-title {
   text-align: center;
   font-size: 1.6rem;
-  font-weight: 800;
+  font-weight: 400;
   color: #0f172a;
   margin: 0 0 24px;
+  font-family: "Segoe UI", "Segoe UI Variable", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .table-scroll {
