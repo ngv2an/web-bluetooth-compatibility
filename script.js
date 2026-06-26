@@ -69,7 +69,7 @@ const compatibilityRows = [
   {
     os: "ChromeOS",
     icon: icons.chromebook,
-    support: { Chrome: true, Firefox: false, Opera: true },
+    support: { Chrome: true, Firefox: false, Opera: false },
   },
 ];
 
