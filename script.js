@@ -173,7 +173,7 @@ function renderCompatibilityTable() {
 
   tableBody.innerHTML = compatibilityRows
     .map((row) => `
-      <tr class="${isRowSelected(row.os) ? "row-selected" : ""}">
+      <tr class="${isRowSelected(row.os) ? "row-selected" : selectedOs ? "dimmed" : ""}">
         ${createOsHeader(row)}
         ${createSpecialCell(row.other, row.os)}
         ${browsers.map((browser) => createCompatibilityCell(row, browser)).join("")}

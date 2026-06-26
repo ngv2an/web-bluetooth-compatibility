@@ -123,6 +123,14 @@ td.empty {
   background: var(--row-bg);
 }
 
+/* Dim rows that aren't the selected one */
+tr.dimmed,
+tr.dimmed .browser-tag,
+tr.dimmed .badge,
+tr.dimmed .store-link {
+  color: #94a3b8;
+}
+
 /* Level 1: highlight the whole selected row */
 tr.row-selected td:not(.selected),
 tr.row-selected th {
