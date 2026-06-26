@@ -25,7 +25,7 @@ function createBrowserTag(browser) {
   return `
     <div class="browser-tag">
       ${browserIcons[browser] || ""}
-      <span>${browser}</span>
+      <span>${browser.replace(" ", "<br>")}</span>
     </div>
   `;
 }

@@ -111,6 +111,7 @@ tbody th .os-head {
   font-size: 0.85rem;
   font-weight: 700;
   color: #0f172a;
+  text-align: center;
 }
 
 td.empty {
@@ -132,7 +133,7 @@ td.empty {
   text-decoration: none;
   font-weight: 600;
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 4px;
 }
