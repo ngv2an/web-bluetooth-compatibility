@@ -123,8 +123,24 @@ td.empty {
   background: var(--row-bg);
 }
 
+/* Level 1: highlight the whole selected row */
+tr.row-selected td:not(.selected),
+tr.row-selected th {
+  box-shadow: inset 0 3px 0 #93c5fd, inset 0 -3px 0 #93c5fd;
+}
+
+/* Level 2: emphasize the matched cell */
 td.selected {
   box-shadow: inset 0 0 0 3px #2563eb;
+  font-weight: 800;
+}
+
+td.selected.yes {
+  background: #86efac;
+}
+
+td.selected.no {
+  background: #fca5a5;
 }
 
 .browser-link {

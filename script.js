@@ -88,6 +88,10 @@ function isSelected(os, browser) {
   );
 }
 
+function isRowSelected(os) {
+  return selectedOs && os.toLowerCase() === selectedOs;
+}
+
 function createBadge(isSupported) {
   const statusText = isSupported ? "✅ Supported" : "❌ Not Supported";
   const statusClass = isSupported ? "yes" : "no";
@@ -169,7 +173,7 @@ function renderCompatibilityTable() {
 
   tableBody.innerHTML = compatibilityRows
     .map((row) => `
-      <tr>
+      <tr class="${isRowSelected(row.os) ? "row-selected" : ""}">
         ${createOsHeader(row)}
         ${createSpecialCell(row.other, row.os)}
         ${browsers.map((browser) => createCompatibilityCell(row, browser)).join("")}
