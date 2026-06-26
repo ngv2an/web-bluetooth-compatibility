@@ -18,7 +18,7 @@ const browserIcons = {
   Safari: `<img class="logo-sm" src="images/logo safari.png" alt="Safari" />`,
   "Mobile Safari": `<img class="logo-sm" src="images/logo safari.png" alt="Mobile Safari" />`,
   Bluefy: `<img class="logo-sm" src="images/logo bluefy.png" alt="Bluefy" />`,
-  "Samsung Internet": `<img class="logo-sm" src="images/logo samsung browser.png" alt="Samsung Internet" />`,
+  "Samsung Browser": `<img class="logo-sm" src="images/logo samsung browser.png" alt="Samsung Browser" />`,
 };
 
 function createBrowserTag(browser) {
@@ -52,7 +52,7 @@ const compatibilityRows = [
     os: "Android",
     icon: icons.android,
     support: { Chrome: true, Firefox: false, Opera: true },
-    mobile: { browser: "Samsung Internet", supported: true },
+    mobile: { browser: "Samsung Browser", supported: true },
   },
   {
     os: "iOS",
@@ -76,7 +76,7 @@ const compatibilityRows = [
 ];
 
 function createBadge(isSupported) {
-  const statusText = isSupported ? "Supported" : "Not Supported";
+  const statusText = isSupported ? "✅ Supported" : "❌ Not Supported";
   const statusClass = isSupported ? "yes" : "no";
 
   return `<span class="badge ${statusClass}">${statusText}</span>`;
