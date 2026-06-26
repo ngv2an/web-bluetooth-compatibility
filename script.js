@@ -16,7 +16,7 @@ const browserIcons = {
   Opera: `<img class="logo-sm" src="images/logo opera.png" alt="Opera" />`,
   Edge: `<img class="logo-sm" src="images/logo edge.png" alt="Edge" />`,
   Safari: `<img class="logo-sm" src="images/logo safari.png" alt="Safari" />`,
-  "Mobile Safari (iOS)": `<img class="logo-sm" src="images/logo safari.png" alt="Mobile Safari" />`,
+  "Mobile Safari": `<img class="logo-sm" src="images/logo safari.png" alt="Mobile Safari" />`,
   Bluefy: `<img class="logo-sm" src="images/logo bluefy.png" alt="Bluefy" />`,
 };
 
@@ -56,7 +56,7 @@ const compatibilityRows = [
     os: "iOS",
     icon: icons.ios,
     support: { Chrome: false, Firefox: false, Opera: false },
-    other: { browser: "Mobile Safari (iOS)", supported: false },
+    other: { browser: "Mobile Safari", supported: false },
     bluefy: {
       browser: "Bluefy",
       supported: true,
