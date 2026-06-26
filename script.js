@@ -17,7 +17,7 @@ const browserIcons = {
   Edge: `<img class="logo-sm" src="images/logo edge.png" alt="Edge" />`,
   Safari: `<img class="logo-sm" src="images/logo safari.png" alt="Safari" />`,
   "Mobile Safari": `<img class="logo-sm" src="images/logo safari.png" alt="Mobile Safari" />`,
-  Bluefy: `<img class="logo-sm" src="images/logo bluefy.png" alt="Bluefy" />`,
+  Bluefy: `<img class="logo-sm logo-bluefy" src="images/logo bluefy.png" alt="Bluefy" />`,
   "Samsung Browser": `<img class="logo-sm" src="images/logo samsung browser.png" alt="Samsung Browser" />`,
 };
 

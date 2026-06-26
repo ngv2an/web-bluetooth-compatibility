@@ -75,6 +75,11 @@ tbody th .os-head {
   object-fit: contain;
 }
 
+.logo-bluefy {
+  width: 30px;
+  height: 30px;
+}
+
 .cell {
   display: flex;
   flex-direction: column;
