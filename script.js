@@ -155,7 +155,7 @@ function createSpecialCell(special, os) {
 
 function createOsHeader(row) {
   return `
-    <th class="os-col">
+    <th class="os-col" data-os="${row.os}">
       <div class="os-head">
         ${row.icon}
         ${row.os}
@@ -185,19 +185,32 @@ function renderCompatibilityTable() {
 }
 
 function updateUrl(os, browser) {
-  const query =
-    os && browser
-      ? `?os=${encodeURIComponent(os)}&browser=${encodeURIComponent(browser)}`
-      : "";
-  history.replaceState(null, "", `${location.pathname}${query}`);
+  const params = new URLSearchParams();
+  if (os) {
+    params.set("os", os);
+  }
+  if (os && browser) {
+    params.set("browser", browser);
+  }
+  const query = params.toString();
+  history.replaceState(null, "", query ? `${location.pathname}?${query}` : location.pathname);
 }
 
 function handleTableClick(event) {
-  // Clicking either outermost OS column clears the highlight.
-  if (event.target.closest("th.os-col")) {
-    selectedOs = "";
-    selectedBrowser = "";
-    updateUrl();
+  // Clicking an outermost OS column toggles a whole-row highlight.
+  const osCol = event.target.closest("th.os-col");
+  if (osCol) {
+    const os = osCol.dataset.os;
+    if (selectedOs === os.toLowerCase()) {
+      // Already highlighted -> toggle back to the un-highlighted view.
+      selectedOs = "";
+      selectedBrowser = "";
+      updateUrl();
+    } else {
+      selectedOs = os.toLowerCase();
+      selectedBrowser = "";
+      updateUrl(os);
+    }
     renderCompatibilityTable();
     return;
   }
