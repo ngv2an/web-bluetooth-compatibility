@@ -16,6 +16,7 @@ const browserIcons = {
   Opera: `<img class="logo-sm" src="images/logo opera.png" alt="Opera" />`,
   Edge: `<img class="logo-sm" src="images/logo edge.png" alt="Edge" />`,
   Safari: `<img class="logo-sm" src="images/logo safari.png" alt="Safari" />`,
+  "Mobile Safari (iOS)": `<img class="logo-sm" src="images/logo safari.png" alt="Mobile Safari" />`,
   Bluefy: `<img class="logo-sm" src="images/logo bluefy.png" alt="Bluefy" />`,
 };
 
@@ -55,7 +56,8 @@ const compatibilityRows = [
     os: "iOS",
     icon: icons.ios,
     support: { Chrome: false, Firefox: false, Opera: false },
-    other: {
+    other: { browser: "Mobile Safari (iOS)", supported: false },
+    bluefy: {
       browser: "Bluefy",
       supported: true,
       link: {
@@ -104,19 +106,19 @@ function createCompatibilityCell(row, browser) {
   `;
 }
 
-function createOtherCell(other) {
-  if (!other) {
+function createSpecialCell(special) {
+  if (!special) {
     return `<td class="empty"></td>`;
   }
 
-  const statusClass = other.supported ? "yes" : "no";
+  const statusClass = special.supported ? "yes" : "no";
 
   return `
     <td class="${statusClass}">
       <div class="cell">
-        ${createBrowserTag(other.browser)}
-        ${createBadge(other.supported)}
-        ${createStoreLink(other.link)}
+        ${createBrowserTag(special.browser)}
+        ${createBadge(special.supported)}
+        ${createStoreLink(special.link)}
       </div>
     </td>
   `;
@@ -138,8 +140,9 @@ function renderCompatibilityTable() {
             ${row.os}
           </div>
         </th>
+        ${createSpecialCell(row.other)}
+        ${createSpecialCell(row.bluefy)}
         ${browsers.map((browser) => createCompatibilityCell(row, browser)).join("")}
-        ${createOtherCell(row.other)}
       </tr>
     `)
     .join("");
