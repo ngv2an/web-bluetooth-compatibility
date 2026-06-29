@@ -1,4 +1,9 @@
-const browsers = ["Chrome", "Firefox", "Opera"];
+// Đổi thành true để hiện cột Opera.
+const SHOW_OPERA = false;
+
+const browsers = ["Chrome", "Firefox", "Opera"].filter(
+  (browser) => browser !== "Opera" || SHOW_OPERA
+);
 
 const icons = {
   windows: `<img class="logo-sm" src="images/logo windows.png" alt="Windows" />`,
@@ -8,6 +13,7 @@ const icons = {
   android: `<img class="logo-sm" src="images/logo Android.png" alt="Android" />`,
   chromebook: `<svg class="logo-sm" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="24" rx="2" fill="#5f6368"/><rect x="9" y="12" width="30" height="18" fill="#fff"/><path d="M4 35h40l-2 4H6z" fill="#9aa0a6"/><circle cx="24" cy="21" r="5" fill="#4285f4"/></svg>`,
   appStore: `<img class="logo-sm" src="images/logo apple store.png" alt="App Store" />`,
+  video: `<svg class="logo-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3" fill="#ef4444"/><path fill="#fff" d="M10 9l5 3-5 3z"/></svg>`,
 };
 
 const browserIcons = {
@@ -112,6 +118,15 @@ function createStoreLink(link) {
   `;
 }
 
+function createVideoLink(href) {
+  return `
+    <a class="video-link" href="${href || "#"}" target="_blank" rel="noopener">
+      ${icons.video}
+      Demo
+    </a>
+  `;
+}
+
 function createCompatibilityCell(row, browser) {
   if (row.support[browser] === undefined) {
     return `<td class="empty"></td>`;
@@ -125,6 +140,7 @@ function createCompatibilityCell(row, browser) {
       <div class="cell">
         ${createBrowserTag(browser)}
         ${createBadge(row.support[browser])}
+        ${createVideoLink(row.videos?.[browser])}
       </div>
     </td>
   `;
@@ -148,6 +164,7 @@ function createSpecialCell(special, os) {
         ${tag}
         ${createStoreLink(special.link)}
         ${createBadge(special.supported)}
+        ${createVideoLink(special.video)}
       </div>
     </td>
   `;
