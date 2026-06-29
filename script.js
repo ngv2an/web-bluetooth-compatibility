@@ -119,8 +119,17 @@ function createStoreLink(link) {
 }
 
 function createVideoLink(href) {
+  if (!href) {
+    return `
+      <span class="video-link disabled">
+        ${icons.video}
+        Demo
+      </span>
+    `;
+  }
+
   return `
-    <a class="video-link" href="${href || "#"}" target="_blank" rel="noopener">
+    <a class="video-link" href="${href}" target="_blank" rel="noopener">
       ${icons.video}
       Demo
     </a>
