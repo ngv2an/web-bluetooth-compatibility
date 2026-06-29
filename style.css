@@ -1,11 +1,14 @@
 :root {
-  --green: #16a34a;
-  --green-bg: #dcfce7;
-  --red: #dc2626;
-  --red-bg: #fee2e2;
+  --green: #15803d;
+  --green-bg: #ecfdf3;
+  --green-line: #bbf7d0;
+  --red: #b91c1c;
+  --red-bg: #fef2f2;
+  --red-line: #fecaca;
   --border: #64748b;
   --head-bg: #1e293b;
   --row-bg: #fff;
+  --accent: #2563eb;
 }
 
 * {
@@ -89,43 +92,52 @@ tbody th .os-head {
   height: 30px;
 }
 
+/* Icon trình duyệt bên trong ô (form lấy từ design-2). */
+.cell .logo-sm {
+  width: 34px;
+  height: 34px;
+}
+
+.cell .logo-bluefy {
+  width: 38px;
+  height: 38px;
+}
+
 .cell {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
+  min-width: 118px;
+  padding: 2px;
 }
 
-.badge {
+.bname {
+  font-weight: 700;
+  font-size: 0.96rem;
+  color: #0f172a;
+  text-align: center;
+}
+
+.pill {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-size: 0.78rem;
   font-weight: 700;
-  padding: 4px 10px;
+  padding: 5px 13px;
   border-radius: 999px;
   white-space: nowrap;
 }
 
-.badge.yes {
-  color: var(--green);
-  background: var(--green-bg);
+.pill.ok {
+  color: #fff;
+  background: var(--green);
 }
 
-.badge.no {
-  color: var(--red);
-  background: var(--red-bg);
-}
-
-.browser-tag {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #0f172a;
-  text-align: center;
+.pill.nok {
+  color: #fff;
+  background: var(--red);
 }
 
 td.empty {
@@ -139,9 +151,10 @@ th.os-col {
 
 /* Dim rows that aren't the selected one */
 tr.dimmed,
-tr.dimmed .browser-tag,
-tr.dimmed .badge,
-tr.dimmed .store-link {
+tr.dimmed .bname,
+tr.dimmed .pill,
+tr.dimmed .store,
+tr.dimmed .demo {
   color: #94a3b8;
 }
 
@@ -166,60 +179,56 @@ td.selected.no {
   background: #fca5a5;
 }
 
-.browser-link {
+/* Nút App Store (form từ design-2). */
+.store {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--accent);
   text-decoration: none;
-  color: inherit;
-}
-
-.browser-link:hover .browser-tag {
-  text-decoration: underline;
-}
-
-.store-link {
-  font-size: 0.74rem;
-  color: #2563eb;
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 4px;
-}
-
-.store-link:hover {
-  text-decoration: underline;
-}
-
-.store-link .logo-sm {
-  width: 14px;
-  height: 14px;
-}
-
-.video-link {
-  font-size: 0.74rem;
-  color: #ef4444;
-  text-decoration: none;
-  font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+  border: 1px solid var(--accent);
+  padding: 5px 11px;
+  border-radius: 8px;
 }
 
-.video-link:hover {
-  text-decoration: underline;
+.store:hover {
+  background: var(--accent);
+  color: #fff;
 }
 
-.video-link.disabled {
+.store .logo-sm {
+  width: 15px;
+  height: 15px;
+}
+
+.store:hover .logo-sm {
+  filter: brightness(0) invert(1);
+}
+
+/* Link Demo với tam giác play (form từ design-2). */
+.demo {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.demo .tri {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 7px solid currentColor;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.demo.disabled {
   color: #94a3b8;
   cursor: default;
-  opacity: 0.6;
-}
-
-.video-link.disabled:hover {
-  text-decoration: none;
-}
-
-.video-link .logo-sm {
-  width: 16px;
-  height: 16px;
+  opacity: 0.75;
 }

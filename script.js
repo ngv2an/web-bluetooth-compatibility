@@ -13,7 +13,6 @@ const icons = {
   android: `<img class="logo-sm" src="images/logo Android.png" alt="Android" />`,
   chromebook: `<svg class="logo-sm" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="24" rx="2" fill="#5f6368"/><rect x="9" y="12" width="30" height="18" fill="#fff"/><path d="M4 35h40l-2 4H6z" fill="#9aa0a6"/><circle cx="24" cy="21" r="5" fill="#4285f4"/></svg>`,
   appStore: `<img class="logo-sm" src="images/logo apple store.png" alt="App Store" />`,
-  video: `<svg class="logo-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3" fill="#ef4444"/><path fill="#fff" d="M10 9l5 3-5 3z"/></svg>`,
 };
 
 const browserIcons = {
@@ -27,11 +26,15 @@ const browserIcons = {
   "Samsung Browser": `<img class="logo-sm" src="images/logo samsung browser.png" alt="Samsung Browser" />`,
 };
 
-function createBrowserTag(browser) {
+// Mỗi ô trong matrix dùng đúng "form" của 1 thẻ (card) trong design-2.
+function createCardCell(browser, supported, link, video) {
   return `
-    <div class="browser-tag">
+    <div class="cell">
       ${browserIcons[browser] || ""}
-      <span>${browser.replace(" ", "<br>")}</span>
+      <span class="bname">${browser}</span>
+      ${createPill(supported)}
+      ${createStoreLink(link)}
+      ${createDemoLink(video)}
     </div>
   `;
 }
@@ -98,11 +101,11 @@ function isRowSelected(os) {
   return selectedOs && os.toLowerCase() === selectedOs;
 }
 
-function createBadge(isSupported) {
-  const statusText = isSupported ? "✅ Supported" : "❌ Not Supported";
-  const statusClass = isSupported ? "yes" : "no";
+function createPill(isSupported) {
+  const statusText = isSupported ? "✓ Supported" : "✕ Not supported";
+  const statusClass = isSupported ? "ok" : "nok";
 
-  return `<span class="badge ${statusClass}">${statusText}</span>`;
+  return `<span class="pill ${statusClass}">${statusText}</span>`;
 }
 
 function createStoreLink(link) {
@@ -111,27 +114,21 @@ function createStoreLink(link) {
   }
 
   return `
-    <a class="store-link" href="${link.href}" target="_blank" rel="noopener">
+    <a class="store" href="${link.href}" target="_blank" rel="noopener">
       ${icons.appStore}
-      ${link.label}
+      Get on ${link.label}
     </a>
   `;
 }
 
-function createVideoLink(href) {
+function createDemoLink(href) {
   if (!href) {
-    return `
-      <span class="video-link disabled">
-        ${icons.video}
-        Demo
-      </span>
-    `;
+    return `<span class="demo disabled"><span class="tri"></span>Demo</span>`;
   }
 
   return `
-    <a class="video-link" href="${href}" target="_blank" rel="noopener">
-      ${icons.video}
-      Demo
+    <a class="demo" href="${href}" target="_blank" rel="noopener">
+      <span class="tri"></span>Demo
     </a>
   `;
 }
@@ -146,11 +143,7 @@ function createCompatibilityCell(row, browser) {
 
   return `
     <td class="${statusClass}${selectedClass}" data-os="${row.os}" data-browser="${browser}">
-      <div class="cell">
-        ${createBrowserTag(browser)}
-        ${createBadge(row.support[browser])}
-        ${createVideoLink(row.videos?.[browser])}
-      </div>
+      ${createCardCell(browser, row.support[browser], null, row.videos?.[browser])}
     </td>
   `;
 }
@@ -162,19 +155,10 @@ function createSpecialCell(special, os) {
 
   const statusClass = special.supported ? "yes" : "no";
   const selectedClass = isSelected(os, special.browser) ? " selected" : "";
-  const browserTag = createBrowserTag(special.browser);
-  const tag = special.link
-    ? `<a class="browser-link" href="${special.link.href}" target="_blank" rel="noopener">${browserTag}</a>`
-    : browserTag;
 
   return `
     <td class="${statusClass}${selectedClass}" data-os="${os}" data-browser="${special.browser}">
-      <div class="cell">
-        ${tag}
-        ${createStoreLink(special.link)}
-        ${createBadge(special.supported)}
-        ${createVideoLink(special.video)}
-      </div>
+      ${createCardCell(special.browser, special.supported, special.link, special.video)}
     </td>
   `;
 }
